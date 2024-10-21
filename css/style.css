@@ -1,0 +1,169 @@
+@keyframes fromTop {
+    0% {
+        transform: translateY(-20px);
+    }
+    100% {
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+:root {
+    --main-color: #080808;
+    --sub-color: #1d1d1d;
+    --text-color: #f3f3f3;
+    --button-color: #e4e4e4;
+}
+
+::selection {
+    background-color: var(--text-color);
+    color: var(--main-color);
+}
+
+::-moz-selection {
+    background-color: var(--text-color);
+    color: var(--main-color);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    /*background: no-repeat center/30% url(../src/teenieping.png);*/
+    font-family: "Noto Sans KR", sans-serif;
+    font-weight: 500;
+    color: var(--text-color);
+    background-color: var(--main-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
+    overflow: hidden;
+    caret-color: var(--text-color);
+}
+
+.bg-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    background-size: cover;
+    filter: blur(128px);
+}
+
+.home {
+    animation: fromTop 2s cubic-bezier(0.33, 1, 0.68, 1) forwards, fadeIn 2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+.quiz {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    animation: fadeIn 1s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+}
+
+h1 {
+    margin: 0;
+    font-size: 72px;
+    text-align: center;
+}
+
+p {
+    margin: 12px 0 36px 0;
+    font-size: 16px;
+    text-align: center;
+}
+
+img {
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+input {
+    font-family: "Noto Sans KR", sans-serif;
+    background-color: var(--sub-color);
+    color: var(--text-color);
+    border: none;
+    border-radius: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0 16px 0 16px;
+    margin-right: 8px;
+    width: 240px;
+    height: 40px;
+    font-size: 16px;
+}
+
+input:focus {
+    outline: none;
+}
+
+button {
+    font-family: "Noto Sans KR", sans-serif;
+    background-color: var(--text-color);
+    color: var(--main-color);
+    border: none;
+    border-radius: 36px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 160px;
+    height: 40px;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.5s cubic-bezier(0.33, 1, 0.68, 1), transform 0.5s cubic-bezier(0.33, 1, 0.68, 1);
+}
+
+button:hover {
+    background-color: var(--button-color);
+    transform: scale(1.05);
+    transform: translateY(-10%);
+}
+
+.button {
+    display: flex;
+    justify-content: center;
+    user-select: none;
+}
+
+.settings-button {
+    width: 40px;
+    height: 40px;
+    margin-right: 8px;
+}
+
+.start-button {
+    padding-left: 15px;
+}
+
+.enter-button {
+    width: 40px;
+    height: 40px;
+}
+
+.material-symbols-outlined {
+    vertical-align: middle;
+    color: var(--sub-color);
+}
+
+.info h1 {
+    font-size: 48px;
+}
