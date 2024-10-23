@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="kr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,22 +7,25 @@
     <link rel="icon" href="src/favicon.ico" type="image/x-icon">
     <link rel="shortcut icon" href="src/favicon.ico" type="image/x-icon">
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20,400,0,0&icon_names=keyboard_arrow_up" />
-    <script src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <script defer src="js/script.js"></script>
 </head>
 <body>
     <div class="bg-image"></div>
     <div class="quiz">
         <div class="info">
-            <h1>0/50<br>◯◯핑</h1>
-            <img src="teenieping/1.png" class="teenieping" width="400" height="400" oncontextmenu="return false;" draggable="false" style="-webkit-user-drag: none; user-select: none;">
+            <h1 id="questionNum">Q0</h1><!--
+            --><h1 id="score">0/NaN</h1>
+            <h1 id="hint">◯◯핑</h1>
+            <img src="teenieping/0.png" class="teenieping" width="400" height="400" oncontextmenu="return false;" draggable="false">
         </div>
         <div class="button">
             <input type="text" id="userInput" placeholder="답을 입력하세요">
-            <button onclick="enterAnswer()" class="enter-button"><span class="material-symbols-outlined">keyboard_arrow_up</span></button>
+            <button id="submitButton" class="enter-button">
+                <span class="material-symbols-outlined">keyboard_arrow_up</span>
+            </button>
         </div>
     </div>
 </body>
