@@ -164,8 +164,13 @@ button:hover {
     padding-left: 15px;
 }
 
-.enter-button {
+#submitButton {
     width: 40px;
+    height: 40px;
+}
+
+#continueButton {
+    width: 240px;
     height: 40px;
 }
 
