@@ -10,7 +10,9 @@ document.addEventListener("DOMContentLoaded", () => {
         "하츄핑", "키키핑", "아잉핑", "부끄핑", "바로핑", "부투핑", "아자핑", "깜빡핑", "띠용핑", "차차핑", "주르핑", "차나핑",
         "라라핑", "따라핑", "나르핑", "무셔핑", "투투핑", "차캐핑", "떠벌핑", "다조핑", "화나핑", "시러핑", "바네핑", "악동핑",
         "덜덜핑", "그림핑", "무거핑", "꺼꿀핑", "씽씽핑", "베베핑", "코자핑", "딱풀핑", "모야핑", "토이핑", "또까핑", "플라핑",
-        "노라핑", "노리핑", "해핑", "아휴핑", "똑똑핑", "꽁꽁핑", "찌릿핑", "홀로핑", "앙대핑"
+        "노라핑", "노리핑", "해핑", "아휴핑", "똑똑핑", "꽁꽁핑", "찌릿핑", "홀로핑", "앙대핑", "까르핑", "다이아 하츄핑",
+        "방글핑", "믿어핑", "조아핑","아야핑", "소원핑", "토닥핑", "쪼꼼핑", "싹싹핑", "맛나핑", "포근핑", "메모핑", "공쥬핑",
+        "짝짝핑", "주네핑", "뚝딱핑", "발레핑", "원더핑", "앙대핑"
     ]
     const totalQuestions = answers.length
 
@@ -37,7 +39,7 @@ document.addEventListener("DOMContentLoaded", () => {
     async function changeImage(imgElement, src) {
         try {
             const image = new Image()
-            image.src = src
+            image.src = "teenieping/0.png"
             await image.decode()
             imgElement.src = src
         } catch (error) {
