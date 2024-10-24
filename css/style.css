@@ -148,20 +148,79 @@ button:hover {
     transform: translateY(-10%);
 }
 
-.button {
+button:focus {
+    background-color: var(--button-color);
+    outline: none;
+}
+
+.buttons {
     display: flex;
     justify-content: center;
     user-select: none;
 }
 
-.settings-button {
+.settings-btn {
+    position: relative;
     width: 40px;
     height: 40px;
     margin-right: 8px;
 }
 
-.start-button {
-    padding-left: 15px;
+.start-btn {
+    position: relative;
+}
+
+.settings {
+    display: none;
+    position: absolute;
+    bottom: 50px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    padding: 10px;
+    border-radius: 12px;
+    transition: opacity 0.3s ease, transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+    opacity: 0;
+    transform: translate(-50%, 100px);
+}
+
+.settings.active {
+    opacity: 1;
+    transform: translate(-50%, 120px);
+}
+
+.settings.hidden {
+    opacity: 0;
+    transform: translate(-50%, 92px);
+}
+
+.settings label {
+    text-align: right;
+}
+
+.settings input {
+    margin-left: 10px;
+    width: 60px;
+    height: 40px;
+    font-size: 16px;
+    text-align: center;
+    background-color: var(--sub-color);
+    color: var(--text-color);
+    border: none;
+}
+
+input[type="number"] {
+    appearance: none;
+    
+    -webkit-appearance: none; /* Chrome, Safari, newer versions of Edge */
+    -moz-appearance: textfield; /* Firefox */
+    -ms-appearance: none; /* Older versions of Internet Explorer */
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none; /* Chrome, Safari */
+    margin: 0;
 }
 
 #submitButton {
@@ -181,4 +240,13 @@ button:hover {
 
 .info h1 {
     font-size: 48px;
+}
+
+footer {
+    font-family: "Noto Sans KR", sans-serif;
+    color: #535353;
+    position: absolute;
+    bottom: -1.7rem;
+    right: 0.5rem;
+    user-select: none;
 }

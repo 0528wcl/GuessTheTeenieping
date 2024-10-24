@@ -6,15 +6,23 @@ document.addEventListener("DOMContentLoaded", () => {
     const hintText = document.getElementById("hint")
     const submitButton = document.getElementById("submitButton")
     const continueButton = document.getElementById("continueButton")
+    
     const answers = [
         "하츄핑", "키키핑", "아잉핑", "부끄핑", "바로핑", "부투핑", "아자핑", "깜빡핑", "띠용핑", "차차핑", "주르핑", "차나핑",
         "라라핑", "따라핑", "나르핑", "무셔핑", "투투핑", "차캐핑", "떠벌핑", "다조핑", "화나핑", "시러핑", "바네핑", "악동핑",
         "덜덜핑", "그림핑", "무거핑", "꺼꿀핑", "씽씽핑", "베베핑", "코자핑", "딱풀핑", "모야핑", "토이핑", "또까핑", "플라핑",
-        "노라핑", "노리핑", "해핑", "아휴핑", "똑똑핑", "꽁꽁핑", "찌릿핑", "홀로핑", "앙대핑", "까르핑", "다이아 하츄핑",
-        "방글핑", "믿어핑", "조아핑","아야핑", "소원핑", "토닥핑", "쪼꼼핑", "싹싹핑", "맛나핑", "포근핑", "메모핑", "공쥬핑",
-        "짝짝핑", "주네핑", "뚝딱핑", "발레핑", "원더핑", "앙대핑"
+        "노라핑", "노리핑", "해핑", "아휴핑", "똑똑핑", "꽁꽁핑", "찌릿핑", "홀로핑", "앙대핑", "다이아 하츄핑", "방글핑",
+        "믿어핑", "조아핑", "까르핑", "아야핑", "소원핑", "토닥핑", "쪼꼼핑", "싹싹핑", "맛나핑", "포근핑", "메모핑", "공쥬핑",
+        "짝짝핑", "주네핑", "뚝딱핑", "발레핑", "원더핑", "다해핑"
     ]
-    const totalQuestions = answers.length
+
+    function getCookie(name) {
+        const value = `; ${document.cookie}`
+        const parts = value.split(`; ${name}=`)
+        if (parts.length === 2) return parts.pop().split(';').shift()
+    }
+
+    const totalQuestions = parseInt(getCookie("totalQuestions")) || answers.length
 
     let usedNumbers = []
     let questionNum = 0
@@ -22,29 +30,23 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentQuestion = 0
     let continueStatus = 0
 
-    var textHint
+    var textHint;
 
     // 무작위 숫자
     function getRandomNumber() {
-        let randomNumber
-        do {
-            randomNumber = Math.floor(Math.random() * totalQuestions) + 1
-        } while (usedNumbers.includes(randomNumber))
-        
+        const availableNumbers = [...Array(totalQuestions).keys()].map(n => n + 1).filter(n => !usedNumbers.includes(n))
+        const randomIndex = Math.floor(Math.random() * availableNumbers.length)
+        const randomNumber = availableNumbers[randomIndex]
         usedNumbers.push(randomNumber)
         return randomNumber
     }
 
     // 이미지 바꾸기
-    async function changeImage(imgElement, src) {
-        try {
-            const image = new Image()
-            image.src = "teenieping/0.png"
-            await image.decode()
-            imgElement.src = src
-        } catch (error) {
-            console.error(`Failed to load image '${src}'`)
-        }
+    function changeImage(imgElement, src) {
+        const image = new Image()
+        image.src = "teenieping/0.png"
+        image.onload = () => { imgElement.src = src }
+        image.onerror = () => { console.error(`Failed to load image '${src}'`) }
     }
 
     // 정답 체크
@@ -77,7 +79,7 @@ document.addEventListener("DOMContentLoaded", () => {
         currentQuestion = getRandomNumber()
         changeImage(quizImage, `teenieping/${currentQuestion}.png`)
         inputBox.value = ""
-        textHint = answers[currentQuestion - 1].replace("핑", "").replace(/./g, "◯") + "핑"
+        textHint = answers[currentQuestion - 1].replace("핑", "").replace(/[^\s]/g, "◯") + "핑";
         updateUI()
         toggleElement(inputBox)
         toggleElement(submitButton)
@@ -100,7 +102,7 @@ document.addEventListener("DOMContentLoaded", () => {
         } else {
             id.style.display = "none"
         }
-      }
+    }
 
     // 엔터키
     document.addEventListener("keydown", (event) => {
