@@ -16,13 +16,15 @@ document.addEventListener("DOMContentLoaded", () => {
         "짝짝핑", "주네핑", "뚝딱핑", "발레핑", "원더핑", "다해핑"
     ]
 
+    /** 쿠키 가져오기 */
     function getCookie(name) {
         const value = `; ${document.cookie}`
         const parts = value.split(`; ${name}=`)
         if (parts.length === 2) return parts.pop().split(';').shift()
     }
 
-    const totalQuestions = parseInt(getCookie("totalQuestions")) || answers.length
+    const imageCount = 65
+    const totalQuestions = parseInt(getCookie("totalQuestions")) || 50
 
     let usedNumbers = []
     let questionNum = 0
@@ -30,18 +32,18 @@ document.addEventListener("DOMContentLoaded", () => {
     let currentQuestion = 0
     let continueStatus = 0
 
-    var textHint;
+    var textHint
 
-    // 무작위 숫자
+    /** 안 쓰인 숫자 중에서 무작위 숫자 생성하기 */
     function getRandomNumber() {
-        const availableNumbers = [...Array(totalQuestions).keys()].map(n => n + 1).filter(n => !usedNumbers.includes(n))
+        const availableNumbers = [...Array(imageCount).keys()].map(n => n + 1).filter(n => !usedNumbers.includes(n))
         const randomIndex = Math.floor(Math.random() * availableNumbers.length)
         const randomNumber = availableNumbers[randomIndex]
         usedNumbers.push(randomNumber)
         return randomNumber
     }
 
-    // 이미지 바꾸기
+    /** 이미지 바꾸기 */
     function changeImage(imgElement, src) {
         const image = new Image()
         image.src = "teenieping/0.png"
@@ -49,12 +51,12 @@ document.addEventListener("DOMContentLoaded", () => {
         image.onerror = () => { console.error(`Failed to load image '${src}'`) }
     }
 
-    // 정답 체크
+    /** 정답 체크하기 */
     function isCorrectAnswer(answer) {
         return answers[currentQuestion - 1] === answer
     }
 
-    // 정답 입력했을 때
+    /** 정답 제출하기 */
     function submitAnswer() {
         const textInput = inputBox.value.trim()
         if (!textInput) return
@@ -72,24 +74,36 @@ document.addEventListener("DOMContentLoaded", () => {
         setTimeout(function() {continueStatus = 1}, 10)
     }
 
-    // 새 문제 불러오기
+    /** 새 문제 불러오기 */
     function loadNewQuestion() {
-        questionNum++
-        hintText.style.color = "#f3f3f3"
-        currentQuestion = getRandomNumber()
-        changeImage(quizImage, `teenieping/${currentQuestion}.png`)
-        inputBox.value = ""
-        textHint = answers[currentQuestion - 1].replace("핑", "").replace(/[^\s]/g, "◯") + "핑";
-        updateUI()
-        toggleElement(inputBox)
-        toggleElement(submitButton)
-        toggleElement(continueButton)
-        continueStatus = 0
-        inputBox.focus()
-        inputBox.select()
+        if (questionNum >= totalQuestions) {
+            showResults()
+            return
+        } else {
+            questionNum++
+            hintText.style.color = "#f3f3f3"
+            currentQuestion = getRandomNumber()
+            changeImage(quizImage, `teenieping/${currentQuestion}.png`)
+            inputBox.value = ""
+            textHint = answers[currentQuestion - 1].replace("핑", "").replace(/[^\s]/g, "◯") + "핑"
+            updateUI()
+            toggleElement(inputBox)
+            toggleElement(submitButton)
+            toggleElement(continueButton)
+            continueStatus = 0
+            inputBox.focus()
+            inputBox.select()
+        }
     }
 
-    // 텍스트 업데이트
+    /** 결과창 보여주기 */
+    function showResults() {
+        toggleElement(continueButton)
+        toggleElement(quizImage)
+        toggleElement(hint)
+    }
+
+    /** 텍스트 업데이트 */
     function updateUI() {
         questionNumText.innerHTML = `Q${questionNum}`
         scoreText.innerHTML = `${score}/${totalQuestions}`
@@ -104,7 +118,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // 엔터키
+    /** 엔터키 눌렀을 때 */
     document.addEventListener("keydown", (event) => {
         if (event.key === "Enter" && continueStatus === 1) {
             loadNewQuestion()
