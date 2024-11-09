@@ -13,7 +13,11 @@ document.addEventListener("DOMContentLoaded", () => {
         "덜덜핑", "그림핑", "무거핑", "꺼꿀핑", "씽씽핑", "베베핑", "코자핑", "딱풀핑", "모야핑", "토이핑", "또까핑", "플라핑",
         "노라핑", "노리핑", "해핑", "아휴핑", "똑똑핑", "꽁꽁핑", "찌릿핑", "홀로핑", "앙대핑", "다이아 하츄핑", "방글핑",
         "믿어핑", "조아핑", "까르핑", "아야핑", "소원핑", "토닥핑", "쪼꼼핑", "싹싹핑", "맛나핑", "포근핑", "메모핑", "공쥬핑",
-        "짝짝핑", "주네핑", "뚝딱핑", "발레핑", "원더핑", "다해핑"
+        "짝짝핑", "주네핑", "뚝딱핑", "발레핑", "원더핑", "다해핑", "가면핑", "빨리핑", "얌얌핑", "뜨거핑", "삐뽀핑", "간호핑",
+        "힘내핑", "고쳐핑", "아라핑", "패션핑", "꼼딱핑", "퐁당핑", "파티핑", "꾸며핑", "삐짐핑", "아아핑", "행운핑", "빙글핑",
+        "베리 하츄핑", "샤샤핑", "말랑핑", "포실핑", "캔디핑", "머랭핑", "샌드핑", "또너핑", "와플핑", "롤리핑", "마카핑", "핫케핑",
+        "머핑 & 커핑", "요거핑", "눈꽃핑", "푸딩핑", "멜로핑", "쪼꼬핑", "뿌뿌핑", "달콤핑", "새콤핑", "트러핑", "스타 하츄핑",
+        "빛나핑", "초롱핑", "빤짝핑", "깡총핑", "훌라핑", "나눔핑"
     ]
 
     /** 쿠키 가져오기 */
@@ -23,7 +27,7 @@ document.addEventListener("DOMContentLoaded", () => {
         if (parts.length === 2) return parts.pop().split(';').shift()
     }
 
-    const imageCount = 65
+    const imageCount = 112
     const totalQuestions = parseInt(getCookie("totalQuestions")) || 50
 
     let usedNumbers = []
@@ -51,16 +55,11 @@ document.addEventListener("DOMContentLoaded", () => {
         image.onerror = () => { console.error(`Failed to load image '${src}'`) }
     }
 
-    /** 정답 체크하기 */
-    function isCorrectAnswer(answer) {
-        return answers[currentQuestion - 1] === answer
-    }
-
     /** 정답 제출하기 */
     function submitAnswer() {
         const textInput = inputBox.value.trim()
         if (!textInput) return
-        if (isCorrectAnswer(textInput)) {
+        if (answers[currentQuestion - 1] === textInput) {
             score++
             hintText.style.color = "#64ff64"
         } else {
