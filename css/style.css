@@ -17,7 +17,7 @@
 }
 
 :root {
-    --main-color: #080808;
+    --main-color: #050505;
     --sub-color: #1d1d1d;
     --text-color: #f3f3f3;
     --button-color: #e4e4e4;
@@ -66,6 +66,7 @@ body {
 
 .home {
     animation: fromTop 2s cubic-bezier(0.33, 1, 0.68, 1) forwards, fadeIn 2s cubic-bezier(0.33, 1, 0.68, 1) forwards;
+    margin-top: 60px;
 }
 
 .quiz {
@@ -154,6 +155,13 @@ button:focus {
     outline: none;
 }
 
+.home img {
+    display: block;
+    margin: 0 auto;
+    max-width: 40%;
+    height: auto;
+}
+
 .buttons {
     display: flex;
     justify-content: center;
@@ -187,12 +195,12 @@ button:focus {
 
 .settings.active {
     opacity: 1;
-    transform: translate(-50%, 140px);
+    transform: translate(-50%, 120px);
 }
 
 .settings.hidden {
     opacity: 0;
-    transform: translate(-50%, 92px);
+    transform: translate(-50%, 72px);
 }
 
 .settings label {
